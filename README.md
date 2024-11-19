@@ -25,7 +25,7 @@ Eine NodeJS Anwendung die auf Port 88 (dieser kann in der Datei server.js angepa
 Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und NodeJS incl. npm.
 
 **Installation:**  
-1. Download nach /opt/ mit "git clone https://github.com/bmetallica/ipv4manage.git
+1. Download nach /opt/ mit "git clone https://github.com/bmetallica/ipv4manage.git"
 2. "apt install nmap -y"
 3. "cd /opt/ipmanage"
 4. Nodeprojekt initiieren mit "npm init -y"
