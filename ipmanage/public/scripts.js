@@ -341,6 +341,7 @@ function updateIpTable(ips, spaceId) {
           <option value="ESP" ${ip.type === 'ESP' ? 'selected' : ''}>ESP</option>
           <option value="Steckdose" ${ip.type === 'Steckdose' ? 'selected' : ''}>Steckdose</option>
           <option value="NAS" ${ip.type === 'NAS' ? 'selected' : ''}>NAS</option>
+         <option value="Accesspoint" ${ip.type === 'Accesspoint' ? 'selected' : ''}>Access Point</option>
           <option value="Raspberry" ${ip.type === 'Raspberry' ? 'selected' : ''}>Raspberry</option>
           <option value="RaspberryZero" ${ip.type === 'RaspberryZero' ? 'selected' : ''}>RaspberryZero</option>
           <option value="Server" ${ip.type === 'Server' ? 'selected' : ''}>Server</option>
