@@ -64,6 +64,7 @@ async function populateAddressSpaceDropdown() {
 
 // Scan Address Space
 document.getElementById('scan-space').addEventListener('click', async () => {
+alert('Achtung der Scan wird im Hintergrund durchgeführt');
   const spaceId = document.getElementById('address-space-dropdown').value;
   await axios.post(`/api/scan/${spaceId}`);
   alert('Scan fertig!');
