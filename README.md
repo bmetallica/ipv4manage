@@ -27,7 +27,7 @@ Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und No
 **Installation:**  
 1. Download nach /opt/ mit "git clone https://github.com/bmetallica/ipv4manage.git"
 2. "apt install nmap -y"
-3. "cd /opt/ipmanage"
+3. "cd /opt/ipv4manage/ipmanage"
 4. Nodeprojekt initiieren mit "npm init -y"
 5. Abhängigkeiten installieren mit "npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-writer ip axios"
 6. Eine PostgreSQL Datenbank mit dem Namen "ipvx" anlegen
@@ -36,7 +36,7 @@ Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und No
 8. In der Datei ".env" die Datenbankverbindung (User und password) anpassen
 
 **Dienst und Autostart erstellen**
-1. "mv /opt/dpm/utils/ipv.service /etc/systemd/system/"
+1. "mv /opt/ipv4manage/utils/ipv.service /etc/systemd/system/"
 2. "chmod 776 /etc/systemd/system/ipv.service"
 3. "systemctl daemon-reload"
 4. "systemctl start ipv"
