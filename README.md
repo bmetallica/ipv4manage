@@ -32,7 +32,7 @@ Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und No
 5. Abhängigkeiten installieren mit "npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-writer ip axios"
 6. Eine PostgreSQL Datenbank mit dem Namen "ipvx" anlegen
 7. Mit psql in der Datenbank die Tabelle anlegen (das create.sql für diese Tabelle ist im utils Ordner zu finden)  
-   "psql -d ipvx -f /opt/utils/create.sql"
+   "psql -d ipvx -f /opt/ipv4manage/utils/create.sql"
 8. In der Datei ".env" die Datenbankverbindung (User und password) anpassen
 
 **Dienst und Autostart erstellen**
