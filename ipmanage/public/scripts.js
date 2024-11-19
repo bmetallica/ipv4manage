@@ -321,7 +321,7 @@ function updateIpTable(ips, spaceId) {
     const mac_aktClass = ip.mac_akt !== ip.mac_save ? 'mac-differenz' : '';
 
     row.innerHTML = `
-      <td><a href=http://${ip.ip}target=new class="ip-link">${ip.ip}</a></td>
+      <td><a href=http://${ip.ip} target=new class="ip-link">${ip.ip}</a></td>
       <td class="${mac_aktClass}"><font size=2>${ip.mac_akt || ''}</font></td>
       <td class="${mac_aktClass}"><font size=2>${ip.mac_save || ''}</font><br><button class="api-button" onclick="macup('${ip.ip}', '${spaceId}')"><code> <=> </code></button></td>
       <td class="hersteller"><font size=2>${ip.hersteller}</font></td>
