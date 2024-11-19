@@ -1,0 +1,76 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Address Space Management</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>IPv4 Addressmanagement</h1>
+
+    <div id="new-space-form" style="border:thin">
+      neuen Adressraum anlegen: 
+      <label for="cidr">CIDR:</label>
+      <input type="text" id="cidr" placeholder="192.168.1.0/24">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="My Network">
+      <button id="create-space">Bereich anlegen</button>
+    </div>
+
+    <div id="address-space-selection">
+Adressraum ausw&auml;hlen: 
+      <select id="address-space-dropdown">
+        <!-- Options will be populated here -->
+      </select>
+      <button id="scan-space">Adressraum Scannen</button>
+      <button id="mac-save">MACs sichern</button>
+      <input type="checkbox" id="auto-scan"> Auto-Scan jede Stunde
+    </div>
+<div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px; align: right;">
+  <input type="text" id="tableSearch" placeholder="Suche..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; align=right; margin-right: 1%;">
+</div>
+<div id="column-toggle">
+  <label><input type="checkbox" class="toggle-column" data-column="0" checked> IP</label>
+  <label><input type="checkbox" class="toggle-column" data-column="1" checked> MAC Aktuell</label>
+  <label><input type="checkbox" class="toggle-column" data-column="2" checked> MAC Gespeichert</label>
+  <label><input type="checkbox" class="toggle-column" data-column="3" checked> Hersteller</label>
+  <label><input type="checkbox" class="toggle-column" data-column="4" checked> Status</label>
+  <label><input type="checkbox" class="toggle-column" data-column="5" checked> Typ</label>
+  <label><input type="checkbox" class="toggle-column" data-column="6" checked> Hardware</label>
+  <label><input type="checkbox" class="toggle-column" data-column="7" checked> Name</label>
+  <label><input type="checkbox" class="toggle-column" data-column="8" checked> Standort</label>
+  <label><input type="checkbox" class="toggle-column" data-column="9" checked> Kommentar</label>
+</div>
+
+    <table id="ip-table">
+      <thead>
+        <tr>
+          <th>IP</th>
+          <th>MAC-AKT</th>
+          <th>MAC-SAVE</th>
+          <th class="hersteller">Hersteller</th>
+          <th>Status</th>
+          <th>Type</th>
+          <th>Hardware</th>
+          <th>Name</th>
+          <th>Standort</th>
+          <th>Kommentar</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+<div id="scan-popup">
+    <h3>Scan Ergebnisse</h3>
+    <pre id="scan-output">Scan läuft...</pre>
+    <button onclick="closePopup()">Schließen</button>
+</div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/scripts.js"></script>
+</body>
+</html>

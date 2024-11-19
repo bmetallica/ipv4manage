@@ -1,0 +1,182 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1e1e2e; /* Dunkler Hintergrund */
+  color: #f8f8f2; /* Helle Schriftfarbe */
+  margin: 0;
+  padding: 0;
+}
+#ip-table th.hersteller, #ip-table td.hersteller {
+ /* Verhindert Zeilenumbrüche */
+  width: 1%; /* Passt die Breite an den Inhalt an */
+  text-align: center; /* Optional: Zentriert den Inhalt */
+  padding: 1px; /* Minimaler Abstand um den Inhalt */
+  box-sizing: border-box; /* Bezieht Padding in die Breitenberechnung ein */
+}
+#new-space-form {
+  background-color: #2e3b4e; /* Dunkler Hintergrund */
+  color: #fff; /* Weiße Schriftfarbe für guten Kontrast */
+  padding: 20px; /* Etwas Innenabstand für besseren Look */
+  border-radius: 8px; /* Abgerundete Ecken */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Weicher Schatten für Tiefe */
+  border: 2px solid #44475a; /* Dunkler Rand für Abgrenzung */
+}
+
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0px;
+  background-color: #2e2e3e; /* Leicht abgesetzte Container-Farbe */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  color: #a6e3a1; /* Akzentfarbe */
+  margin-bottom: 20px;
+}
+
+#new-space-form, #address-space-selection {
+  margin-bottom: 20px;
+}
+
+#address-space-dropdown, #create-space, #scan-space, #mac-save {
+  margin-right: 10px;
+  background-color: #44475a; /* Button Hintergrund */
+  color: #f8f8f2;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#address-space-dropdown:hover,
+#create-space:hover,
+#scan-space:hover,
+#mac-save:hover {
+  background-color: #6272a4; /* Hover-Effekt */
+}
+
+/* Tabelle an Fenstergröße anpassen */
+#ip-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: auto; /* Gleichmäßige Spalten */
+ max-width: 100%
+}
+
+#ip-table th, #ip-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #44475a;
+  color: #f8f8f2; /* Textfarbe */
+  word-wrap: break-word; /* Zeilenumbruch bei langen Inhalten */
+}
+
+#ip-table th {
+  background-color: #44475a; /* Tabellenkopf-Farbe */
+}
+
+#ip-table td.scan {
+  white-space: nowrap; /* Verhindert Zeilenumbrüche in der Scan-Spalte */
+  width: 1%; /* Spaltenbreite nur so groß wie nötig */
+}
+
+input[type="text"].comment-input {
+  width:100%;
+  height: 40px; /* Höhe so anpassen, dass es wie ein mehrzeiliges Eingabefeld aussieht */
+  overflow-y: auto; /* Scrollen bei Bedarf aktivieren */
+  border: 1px solid #6272a4;
+  background-color: #2e2e3e;
+  color: #f8f8f2;
+  border-radius: 4px;
+  font-size: 14px;
+
+}
+
+.hardware-input, .name-input, .location-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1px;
+  border: 1px solid #6272a4;
+  background-color: #2e2e3e;
+  color: #f8f8f2;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.hardware-input:focus, .name-input:focus, .location-input:focus, .comment-input:focus {
+  outline: none;
+  border-color: #a6e3a1; /* Fokus-Effekt */
+}
+
+/* Scrollbare Tabelle bei kleinen Fenstern */
+.container {
+width: 100%;
+  overflow-x: auto; /* Horizontales Scrollen */
+}
+
+/* Hover-Effekt für Zeilen */
+#ip-table tr:hover {
+  background-color: #3b3b4e;
+}
+
+/* Farbige Zeilen basierend auf Status */
+.status-belegt {
+  background-color: #ff6e6e; /* Rot für "belegt" */
+  color: #fff;
+}
+
+.status-frei {
+  background-color: #8bd1a3; /* Grün für "frei" */
+}
+
+.status-frei-mit-mac {
+  background-color: #ffc069; /* Orange für "frei" mit MAC-AKT */
+}
+
+.mac-differenz {
+  background-color: #ffe066; /* Gelb für unterschiedliche MACs */
+}
+
+/* Popup-Fenster */
+#scan-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2e2e3e;
+  padding: 20px;
+  border: 1px solid #6272a4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 600px;
+  height: 400px;
+  overflow-y: auto;
+  color: #f8f8f2;
+  border-radius: 8px;
+}
+
+#scan-popup pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+/* Link-Grundstil */
+.ip-link {
+  color: white; /* Blau passend zu Bootstrap */
+  text-decoration: none; /* Unterstreichung entfernen */
+  font-weight: bold; /* Fett darstellen */
+  padding: 5px 10px; /* Innenabstand für bessere Klickfläche */
+  border-radius: 5px; /* Abgerundete Ecken */
+  transition: background-color 0.3s, color 0.3s; /* Übergangseffekt */
+}
+
+/* Link-Hover-Effekt */
+.ip-link:hover {
+  background-color: #007BFF; /* Blau als Hintergrund */
+  color: #ffffff; /* Weißer Text */
+  text-decoration: underline; /* Unterstreichung beim Hover */
+}

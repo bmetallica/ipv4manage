@@ -1,0 +1,14 @@
+[Unit]
+Description=IPv4 Management Node.js Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /opt/ip/server.js
+WorkingDirectory=/opt/ip/   
+Restart=always
+User=root
+Environment=PORT=88
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
