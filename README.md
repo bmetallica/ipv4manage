@@ -19,6 +19,8 @@ Eine NodeJS Anwendung die auf Port 88 (dieser kann in der Datei server.js angepa
 - [x] Einfärbung bei gefundener MAC-AKT aber als Frei markiert -> Zeile orange
 - [x] Einfärbung bei Unterschied MAC_AKT und MAC_Save -> Felder gelb
 
+![Alternativtext](https://github.com/bmetallica/ipv4manage/blob/main/utils/prev.jpg)
+
 **Voraussetzungen:**  
 Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und NodeJS incl. npm.
 
