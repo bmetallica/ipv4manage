@@ -33,7 +33,8 @@ Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und No
 6. Eine PostgreSQL Datenbank mit dem Namen "ipvx" anlegen
 7. Mit psql in der Datenbank die Tabelle anlegen (das create.sql für diese Tabelle ist im utils Ordner zu finden)  
    "psql -d ipvx -f /opt/ipv4manage/utils/create.sql"
-8. In der Datei ".env" die Datenbankverbindung (User und password) anpassen
+8. Die Datei db.env in .env umbenennen "mv db.env .env"   
+9. In der Datei ".env" die Datenbankverbindung (User und password) anpassen
 
 **Dienst und Autostart erstellen**
 1. "mv /opt/ipv4manage/utils/ipv.service /etc/systemd/system/"
