@@ -340,6 +340,7 @@ function updateIpTable(ips, spaceId) {
           <option value="Handy" ${ip.type === 'Handy' ? 'selected' : ''}>Handy</option>
           <option value="ESP" ${ip.type === 'ESP' ? 'selected' : ''}>ESP</option>
           <option value="Steckdose" ${ip.type === 'Steckdose' ? 'selected' : ''}>Steckdose</option>
+           <option value="Cam" ${ip.type === 'Cam' ? 'selected' : ''}>IP-Cam</option>
           <option value="NAS" ${ip.type === 'NAS' ? 'selected' : ''}>NAS</option>
          <option value="Accesspoint" ${ip.type === 'Accesspoint' ? 'selected' : ''}>Access Point</option>
           <option value="Raspberry" ${ip.type === 'Raspberry' ? 'selected' : ''}>Raspberry</option>
