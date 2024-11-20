@@ -22,11 +22,11 @@ Eine NodeJS Anwendung die auf Port 88 (dieser kann in der Datei server.js angepa
 ![Alternativtext](https://github.com/bmetallica/ipv4manage/blob/main/utils/prev.jpg)
 
 **Voraussetzungen:**  
-Ein Debian Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und NodeJS incl. npm.
+Ein Linux (in meinem Fall Debian) Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und NodeJS incl. npm.
 
 **Installation:**  
 1. Download nach /opt/ mit "git clone https://github.com/bmetallica/ipv4manage.git"
-2. "apt install nmap -y"
+2. Nmap installieren (unter Debian mit: "apt install nmap -y") 
 3. "cd /opt/ipv4manage/ipmanage"
 4. Nodeprojekt initiieren mit "npm init -y"
 5. Abhängigkeiten installieren mit "npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-writer ip axios"
