@@ -368,6 +368,7 @@ function updateIpTable(ips, spaceId) {
       // Aktualisiere die Klasse der Zeile basierend auf dem neuen Status
       row.classList.remove('status-frei', 'status-belegt');
       row.classList.add(getRowStatusClass(newStatus));
+upt(spaceId);
     });
   });
 
@@ -427,7 +428,7 @@ async function saveCellData(event) {
     const response = await axios.put(`/api/address-space/update/${ip}?space=${space}`, { field, value });
     console.log(`Saved ${field} for IP ${ip}: ${value}`);
 //console.log(space);
-upt(space);
+//upt(space);
   } catch (error) {
     console.error(`Error saving ${field} for IP ${ip}:`, error);
   }
