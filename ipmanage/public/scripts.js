@@ -41,6 +41,18 @@ document.querySelectorAll('.toggle-column').forEach(checkbox => {
   });
 });
 
+async function upch(spaceId){
+   // Anfrage, um den Scan-Wert des Addressraums zu prüfen
+      const scanResponse = await fetch(`/check-scan-value/${spaceId}`);
+      const scanData = await scanResponse.json();
+console.log(`upch`, scanData.scan);
+
+if (Number(scanData.scan) === 1) {
+        document.getElementById('auto-scan').checked = true;
+      } else {
+        document.getElementById('auto-scan').checked = false;
+      }
+}
 
 
 async function populateAddressSpaceDropdown() {
@@ -312,6 +324,7 @@ async function upt(spaceId){
 
 
 function updateIpTable(ips, spaceId) {
+  const na = upch(spaceId);
   const tableBody = document.getElementById('ip-table').getElementsByTagName('tbody')[0];
   tableBody.innerHTML = ''; // Lösche vorherige Tabelleninhalte
   window.currentSpace = spaceId;
