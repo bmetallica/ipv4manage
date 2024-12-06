@@ -51,11 +51,11 @@ app.post('/api/address-space', async (req, res) => {
   }
 
   // Dynamischer Tabellenname: Wir nutzen den Namen des Address Spaces, um eine Tabelle zu erstellen
-
+const sanitizedSpaceId = name.replace(/[\s-]/g, '_');
     // Führe den SQL-Befehl aus, um die Tabelle zu erstellen
    
   const query = `INSERT INTO address_spaces (cidr, name, scan) VALUES ($1, $2, 0) RETURNING name`;
-  const result = await client.query(query, [cidr, name]);
+  const result = await client.query(query, [cidr, sanitizedSpaceId]);
  
 const spaceId = result.rows[0].name;
 
