@@ -61,7 +61,7 @@ async function populateAddressSpaceDropdown() {
   dropdown.innerHTML = ''; // Clear existing options
   response.data.forEach(space => {
     const option = document.createElement('option');
-    option.value = space.id;
+    option.value = space.tab;
     option.innerText = space.name;
     dropdown.appendChild(option);
   });
@@ -129,7 +129,7 @@ function updateScanValue(addressSpaceId, scanValue) {
 // Dropdown für address spaces
 document.getElementById('address-space-dropdown').addEventListener('change', (event) => {
   const addressSpaceId = event.target.value;
-  
+
   // Überprüfen, ob der Scan-Wert in der Datenbank auf 1 gesetzt ist
   fetch(`/check-scan-value/${addressSpaceId}`)
     .then(response => response.json())
@@ -180,7 +180,7 @@ console.log(`Porpulating`, data.ips)
       <td>${ip.comment}</td>
       <td><button onclick="scanIp('${ip.ip}')">Scan</button></td>
     `;
-    
+
     tableBody.appendChild(row);
   });
 });
@@ -238,14 +238,14 @@ async function populateAddressSpaceDropdown() {
       // Wenn Adressräume gefunden wurden, füge sie als Optionen hinzu
       response.data.forEach(space => {
         const option = document.createElement('option');
-        option.value = space.name;  // Der Wert der Option ist die ID des Adressraums
-        window.currentSpace = space.name; 
+        option.value = space.tab;  // Der Wert der Option ist die ID des Adressraums
+        window.currentSpace = space.tab;
 console.log(`fuelle:`, window.currentSpace);
        option.innerText = space.name;  // Der Text der Option ist der Name des Adressraums
         dropdown.appendChild(option);
       });
 dropdown.selectedIndex = 0;
-const firstSpaceId = response.data[0].name;
+const firstSpaceId = response.data[0].tab;
 console.log(firstSpaceId);
 upt(firstSpaceId);
     } else {
@@ -272,7 +272,7 @@ document.getElementById('address-space-dropdown').addEventListener('change', asy
    // Anfrage, um den Scan-Wert des Addressraums zu prüfen
       const scanResponse = await fetch(`/check-scan-value/${spaceId}`);
       const scanData = await scanResponse.json();
-console.log(scanData.scan); 
+console.log(scanData.scan);
 
 if (Number(scanData.scan) === 1) {
         document.getElementById('auto-scan').checked = true;
@@ -319,7 +319,7 @@ async function upt(spaceId){
     } catch (error) {
       console.error('Fehler beim Abrufen der Daten:', error);
     }
-  
+
 };
 
 
@@ -398,7 +398,7 @@ window.macup = function(ip, spaceId) {
       //console.log('API Response:', data);
 //const spaceDropdown = document.getElementById('address-space-dropdown');
       //const currentSpaceId = spaceDropdown.value;  // Aktuellen Space holen
-      upt(spaceId); 
+      upt(spaceId);
       //alert(`Mac aktualisiert`);
 //updateIpTable(ips, spaceId)
     })
@@ -406,7 +406,7 @@ window.macup = function(ip, spaceId) {
 //updateIpTable(ips, spaceId)
 //const spaceDropdown = document.getElementById('address-space-dropdown');
      // const currentSpaceId = spaceDropdown.value;  // Aktuellen Space holen
-      upt(spaceId); 
+      upt(spaceId);
       //console.error('API Fehler:', error);
       //alert(`Fehler beim API-Aufruf für IP: ${ip}`);
     });
@@ -476,4 +476,3 @@ document.getElementById('tableSearch').addEventListener('input', function () {
     row.style.display = matches ? '' : 'none'; // Zeile ein-/ausblenden
   });
 });
-
