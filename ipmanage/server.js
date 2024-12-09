@@ -51,17 +51,18 @@ app.post('/api/address-space', async (req, res) => {
   }
 
   // Dynamischer Tabellenname: Wir nutzen den Namen des Address Spaces, um eine Tabelle zu erstellen
-const sanitizedSpaceId = name.replace(/[\s-]/g, '_');
+//const sanitizedSpaceId = name.replace(/[\s-]/g, '_');
     // Führe den SQL-Befehl aus, um die Tabelle zu erstellen
-   
-  const query = `INSERT INTO address_spaces (cidr, name, scan) VALUES ($1, $2, 0) RETURNING name`;
-  const result = await client.query(query, [cidr, sanitizedSpaceId]);
- 
-const spaceId = result.rows[0].name;
 
+  const query = `INSERT INTO address_spaces (cidr, name, scan) VALUES ($1, $2, 0) RETURNING tab`;
+  const result = await client.query(query, [cidr, name]);
+
+const spaceId = result.rows[0].tab;
+//console.log(spaceId);
 
 const tableName = `${spaceId}_ips`;
 
+//console.log(tableName);
 
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS ${tableName} (
@@ -79,8 +80,8 @@ const tableName = `${spaceId}_ips`;
         created_at TIMESTAMP DEFAULT NOW()
       );
     `;
-await client.query(createTableQuery);
-
+const jjj = await client.query(createTableQuery);
+//console.log(jjj)
 
   // Calculate IP range for CIDR block
   const ipRange = await calculateIpRange(cidr); // Implement this function
@@ -105,7 +106,7 @@ async function calculateIpRange(cidr) {
   while (ip.toLong(currentIp) <= ip.toLong(endIp)) {
     ipRange.push(currentIp);
     // Gehe zur nächsten IP-Adresse, indem die numerische Form der IP um 1 erhöht wird
-    currentIp = ip.fromLong(ip.toLong(currentIp) + 1); 
+    currentIp = ip.fromLong(ip.toLong(currentIp) + 1);
   }
 
   return ipRange;
@@ -127,7 +128,7 @@ app.post('/api/macakt/', async (req, res) => {
   const ip = req.query.ip;
 const query = `UPDATE ${spaceId}_ips SET mac_save = mac_akt WHERE ip = $1`;
   const result = await client.query(query,[ip]);
-  
+
 res.status(200).send('Uebertragung komplett');
 });
 
@@ -146,11 +147,13 @@ res.status(200).send('Uebertragung komplett');
 
 // Scan address space and save MAC addresses
 app.post('/api/scan/:spaceId', async (req, res) => {
+//console.log('scan');
   const { spaceId } = req.params;
-  const query = `SELECT ip FROM ${spaceId}_ips`;
+//console.log(spaceId);
+ const query = `SELECT ip FROM ${spaceId}_ips`;
   const result = await client.query(query);
   const ips = result.rows;
-
+//console.log(query);
   // Clear old MAC addresses
   const deleteQuery = `UPDATE ${spaceId}_ips SET mac_akt = '-', hersteller = ''`;
   await client.query(deleteQuery);
@@ -178,7 +181,7 @@ console.log(result);
 console.log(herst);
       macAddresses.push({ ip, mac });  // Speichern der MAC-Adresse
 
-     
+
       // SQL-Abfrage zum Aktualisieren der MAC-Adresse
       const updateQuery = `UPDATE ${spaceId}_ips SET mac_akt = $1, hersteller = $3  WHERE ip = $2`;
       //console.log(`sdf`, updateQuery);  // Zeige die Abfrage in der Konsole
@@ -198,7 +201,7 @@ console.log(herst);
     }
   }
 
- 
+
   return macAddresses;
 }
 
@@ -288,9 +291,9 @@ app.get('/api/address-space/:name', async (req, res) => {
   const spaceId = req.params.name;
   try {
     // Hole die Daten basierend auf dem ausgewählten Addressraum (spaceId)
-//console.log(spaceId); 
+//console.log(spaceId);
 //   const result = await client.query(`SELECT * FROM ${spaceId}_ips;`, [spaceId]);
-
+console.log(spaceId);
 const tableName = `${spaceId}_ips`;
 
     // Abfrage ausführen
@@ -325,7 +328,8 @@ app.put('/api/address-space/update/:ip', async (req, res) => {
 // API-Route, um den Nmap-Scan zu starten
 app.post('/api/scan/:ip', (req, res) => {
     const ip = req.params.ip;
-    // Nmap-Scan-Befehl
+//console.log(ip);
+   // Nmap-Scan-Befehl
     const command = `nmap -p- ${ip}`;
 
     // Scan ausführen
@@ -374,7 +378,7 @@ app.post('/update-scan', async (req, res) => {
   const { address_space_id, scan_value } = req.body;
 
   try {
-    const query = 'UPDATE address_spaces SET scan = $1 WHERE name = $2';
+    const query = 'UPDATE address_spaces SET scan = $1 WHERE tab = $2';
     await client.query(query, [scan_value, address_space_id]);
     res.json({ success: true });
   } catch (err) {
@@ -388,7 +392,7 @@ app.get('/check-scan-value/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const query = 'SELECT scan FROM address_spaces WHERE name = $1';
+    const query = 'SELECT scan FROM address_spaces WHERE tab = $1';
     const result = await client.query(query, [id]);
 //console.log(result);
     if (result.rows.length > 0) {
@@ -410,11 +414,12 @@ async function runEveryHour() {
 const wert = `1`
     //await someAsyncTask();
  try {
-    const query = 'SELECT name FROM address_spaces WHERE scan = $1';
+    const query = 'SELECT tab FROM address_spaces WHERE scan = $1';
     const result = await client.query(query, [wert]);
 for (const row of result.rows) {
-console.log(row.name);
-await axios.post(`http://localhost:${port}/api/scan/${row.name}`);
+console.log('cron');
+console.log(row.tab);
+await axios.post(`http://localhost:${port}/api/scan/${row.tab}`);
 }
 } catch (err) {
     console.error('keine scans aktiv', err);
@@ -429,4 +434,5 @@ await axios.post(`http://localhost:${port}/api/scan/${row.name}`);
 }
 
 // setInterval sorgt dafür, dass die asynchrone Funktion jede Stunde ausgeführt wird
+//setInterval(runEveryHour, 360);
 setInterval(runEveryHour, 3600000);
