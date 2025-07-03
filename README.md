@@ -1,48 +1,95 @@
-# ipv4manage
-WEB IPv4 management tool  
-Eine NodeJS Anwendung die auf Port 88 (dieser kann in der Datei server.js angepasst werden [muss dann auch in .service Datei angepasst werden]) eine Webseite zur Verwaltung von IPv4 Adressbereichen bereit stellt.  
+# 🖧 ipv4manage
 
-**Folgende Funktionen wurden integriert:**
-- [x] flexibeles anlegen von Adressräumen
-- [x] automatisches Befüllen der Datenbank mit allen in den Adressräumen möglichen IPs
-- [x] Auswahl des Adressraums für die Haupttabelle 
-- [x] Automatisches speichern von Änderungen in der Haupttabelle
-- [x] Suchfunktion über alle Spalten der Haupttabelle
-- [x] Spalten variabel ein/ausblenden
-- [x] Manuelle Möglichkeit einzelne Adressräume mit nmap zu scannen (Erfassung MAC_akt und Hersteller) 
-- [x] Automatischer Scann ausgewählter Adressräume jede Stunde
-- [x] Sichern Aller MACs eines Adressraums (z.B. um Geräte zu finden deren IP sich geändert hat)
-- [x] Aktualisierung einzelner MAC Adressen zu MAC_SAVE
-- [x] Nmap scan einzelner IPs mit Liveansicht 
-- [x] Einfärbung belegter IPs -> Zeile rot
-- [x] Einfärbung freier IPs -> Zeile grün
-- [x] Einfärbung bei gefundener MAC-AKT aber als Frei markiert -> Zeile orange
-- [x] Einfärbung bei Unterschied MAC_AKT und MAC_Save -> Felder gelb
+**WEB IPv4 Management Tool**  
+Eine Node.js-Anwendung zur komfortablen Verwaltung von IPv4-Adressbereichen.  
+Die Anwendung läuft standardmäßig auf **Port 88** (dies kann in `server.js` angepasst werden – bitte ggf. auch die `.service`-Datei anpassen).
 
-![Alternativtext](https://github.com/bmetallica/ipv4manage/blob/main/utils/prev.jpg)
+![Screenshot](https://github.com/bmetallica/ipv4manage/blob/main/utils/prev.jpg)
 
-**Voraussetzungen:**  
-Ein Linux (in meinem Fall Debian) Server mit einer im Netzwerk erreichbaren PostgreSQL Datenbank und NodeJS incl. npm.
+---
 
-**Installation:**  
-1. Download nach /opt/ mit "git clone https://github.com/bmetallica/ipv4manage.git"
-2. Nmap installieren (unter Debian mit: "apt install nmap -y") 
-3. "cd /opt/ipv4manage/ipmanage"
-4. Nodeprojekt initiieren mit "npm init -y"
-5. Abhängigkeiten installieren mit "npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-writer ip axios"
-6. Eine PostgreSQL Datenbank mit dem Namen "ipvx" anlegen
-7. Mit psql in der Datenbank die Tabelle anlegen (das create.sql für diese Tabelle ist im utils Ordner zu finden)  
-   "psql -d ipvx -f /opt/ipv4manage/utils/create.sql"
-8. Die Datei db.env in .env umbenennen "mv db.env .env"   
-9. In der Datei ".env" die Datenbankverbindung (User und password) anpassen
+## ✅ Features
 
-**Dienst und Autostart erstellen**
-1. "mv /opt/ipv4manage/utils/ipv.service /etc/systemd/system/"
-2. "chmod 776 /etc/systemd/system/ipv.service"
-3. "systemctl daemon-reload"
-4. "systemctl start ipv"
-5. Für den Autostart: "systemctl enable ipv"
+- [x] Flexibles Anlegen von Adressräumen
+- [x] Automatisches Befüllen der Datenbank mit allen möglichen IPs
+- [x] Auswahl eines Adressraums für die Haupttabelle
+- [x] Automatisches Speichern von Änderungen in der Haupttabelle
+- [x] Volltextsuche über alle Spalten
+- [x] Dynamisches Ein-/Ausblenden von Spalten
+- [x] Manueller Scan eines Adressraums via `nmap` (MAC-Adresse & Hersteller)
+- [x] Automatischer Stundenscan ausgewählter Adressräume
+- [x] Sicherung aller MAC-Adressen eines Adressraums (z.B. für Geräte mit wechselnder IP)
+- [x] Manuelles Speichern einzelner MAC-Adressen als MAC_SAVE
+- [x] Live-Nmap-Scan einzelner IPs
+- [x] Farbcode für belegte IPs (🔴), freie IPs (🟢), Inkonsistenzen (🟠/🟡)
 
-Die Webseite sollte nun unter **http://localhost:88** erreichbar sein.  
-  
-Viel Spaß mit diesem Projekt
+---
+
+## 🔧 Voraussetzungen
+
+- Debian/Linux Server
+- PostgreSQL-Datenbank (im Netzwerk erreichbar)
+- Node.js & npm
+- `nmap` installiert
+
+---
+
+## 📦 Installation
+
+### 1. Projekt klonen
+
+```bash
+git clone https://github.com/bmetallica/ipv4manage.git /opt/ipv4manage
+cd /opt/ipv4manage/ipmanage
+```
+
+### 2. Abhängigkeiten installieren
+
+```bash
+apt install nmap -y
+npm init -y
+npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-writer ip axios
+```
+
+### 3. PostgreSQL-Datenbank vorbereiten
+
+```bash
+# Datenbank "ipvx" anlegen (z. B. mit pgAdmin oder psql)
+psql -d ipvx -f /opt/ipv4manage/utils/create.sql
+```
+
+### 4. Umgebungsvariablen konfigurieren
+
+```bash
+mv db.env .env
+# Dann .env öffnen und Zugangsdaten zur Datenbank eintragen
+```
+
+---
+
+## ⚙️ Dienst & Autostart einrichten
+
+```bash
+mv /opt/ipv4manage/utils/ipv.service /etc/systemd/system/
+chmod 776 /etc/systemd/system/ipv.service
+systemctl daemon-reload
+systemctl start ipv
+systemctl enable ipv
+```
+
+---
+
+## 🌐 Webzugriff
+
+Die Anwendung ist nun über den Browser erreichbar unter:
+
+```
+http://localhost:88
+```
+
+(Port ggf. in `server.js` und `ipv.service` anpassen)
+
+
+---
+
+**Autor:** [bmetallica](https://github.com/bmetallica)
