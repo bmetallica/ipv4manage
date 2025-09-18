@@ -25,16 +25,37 @@ Die Anwendung läuft standardmäßig auf **Port 88** (dies kann in `server.js` a
 
 ---
 
-## 🔧 Voraussetzungen
+
+## 📦 Installation <br>
+
+### 🐳 **Docker-Installation**
+
+<table border=2><tr><th>
+<b><u> 🔧 Voraussetzungen </u></b></th><td>
+- docker & compose Plugin
+</td></tr></table>
+<br>
+  
+```bash
+mkdir ipmanage
+cd ipmanage
+wget https://github.com/bmetallica/ipv4manage/blob/main/docker-compose.yml
+docker compose up -d
+```
+<br><br>
+
+### ⚙️ **Manuelle Installation**
+
+<table border=2><tr><th>🔧 Voraussetzungen</th><td>
 
 - Debian/Linux Server
 - PostgreSQL-Datenbank (im Netzwerk erreichbar)
 - Node.js & npm
 - `nmap` installiert
 
----
+</td></tr></table>
+<br>
 
-## 📦 Installation
 
 ### 1. Projekt klonen
 
