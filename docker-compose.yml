@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: ipv4manage_db
+    environment:
+      POSTGRES_DB: ipvx
+      POSTGRES_USER: ipvuser
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5436:5432"
+    restart: always
+
+  app:
+    network_mode: host
+    image: bmetallica/ipv4manage:latest
+    container_name: ipv4manage_app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: 127.0.0.1          
+      DB_PORT: 5436
+      DB_USER: ipvuser
+      DB_PASSWORD: secret
+      DB_NAME: ipvx
+      PORT: 88
+    ports:
+      - "88:88"
+    restart: always
+
+volumes:
+  db_data:
