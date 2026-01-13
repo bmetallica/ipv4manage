@@ -456,7 +456,7 @@ app.delete('/api/address-space/:id', async (req, res) => {
     const tableName = `${spaceName}_ips`;
     
     // Drop the table associated with the address space
-    const dropTableQuery = `DROP TABLE IF EXISTS ${tableName}`;
+    const dropTableQuery = `DROP TABLE IF EXISTS "${tableName}"`;
     await client.query(dropTableQuery);
     
     // Delete the address space from the address_spaces table
