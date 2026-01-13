@@ -11,13 +11,16 @@
   <div class="container">
     <h1>IPv4 Addressmanagement</h1>
 
-    <div id="new-space-form" style="border:thin">
+<div id="new-space-form" style="border:thin; display: flex; justify-content: space-between; align-items: center;">
+      <div>
       neuen Adressraum anlegen: 
       <label for="cidr">CIDR:</label>
       <input type="text" id="cidr" placeholder="192.168.1.0/24">
       <label for="name">Name:</label>
       <input type="text" id="name" placeholder="My Network">
       <button id="create-space">Bereich anlegen</button>
+        </div>
+      <button id="manage-spaces-btn">Adressräume verwalten</button>
     </div>
 
     <div id="address-space-selection">
@@ -69,6 +72,17 @@ Adressraum ausw&auml;hlen:
     <pre id="scan-output">Scan läuft...</pre>
     <button onclick="closePopup()">Schließen</button>
 </div>
+  
+<div id="manage-spaces-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Adressräume verwalten</h2>
+    <div id="spaces-list">
+      <!-- Liste der Adressräume wird hier eingefügt -->
+    </div>
+  </div>
+</div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/scripts.js"></script>
