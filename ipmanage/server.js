@@ -436,3 +436,37 @@ await axios.post(`http://localhost:${port}/api/scan/${row.tab}`);
 // setInterval sorgt dafür, dass die asynchrone Funktion jede Stunde ausgeführt wird
 //setInterval(runEveryHour, 360);
 setInterval(runEveryHour, 3600000);
+
+
+
+// Delete address space
+app.delete('/api/address-space/:id', async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    // Get the space name first to drop the table
+    const spaceQuery = 'SELECT name FROM address_spaces WHERE id = $1';
+    const spaceResult = await client.query(spaceQuery, [id]);
+    
+    if (spaceResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Adressraum nicht gefunden' });
+    }
+    
+    const spaceName = spaceResult.rows[0].name;
+    const tableName = `${spaceName}_ips`;
+    
+    // Drop the table associated with the address space
+    const dropTableQuery = `DROP TABLE IF EXISTS ${tableName}`;
+    await client.query(dropTableQuery);
+    
+    // Delete the address space from the address_spaces table
+    const deleteQuery = 'DELETE FROM address_spaces WHERE id = $1';
+    await client.query(deleteQuery, [id]);
+    
+    io.emit('address-space-deleted', { id });
+    res.status(200).json({ message: 'Adressraum erfolgreich gelöscht' });
+  } catch (error) {
+    console.error('Fehler beim Löschen des Adressraums:', error);
+    res.status(500).json({ error: 'Fehler beim Löschen des Adressraums' });
+  }
+});
