@@ -476,3 +476,66 @@ document.getElementById('tableSearch').addEventListener('input', function () {
     row.style.display = matches ? '' : 'none'; // Zeile ein-/ausblenden
   });
 });
+
+// Manage Spaces Modal
+const manageSpacesBtn = document.getElementById('manage-spaces-btn');
+const manageSpacesModal = document.getElementById('manage-spaces-modal');
+const closeModal = document.querySelector('.close-modal');
+
+// Open modal
+manageSpacesBtn.addEventListener('click', async () => {
+  await loadSpacesList();
+  manageSpacesModal.style.display = 'block';
+});
+
+// Close modal
+closeModal.addEventListener('click', () => {
+  manageSpacesModal.style.display = 'none';
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', (event) => {
+  if (event.target === manageSpacesModal) {
+    manageSpacesModal.style.display = 'none';
+  }
+});
+
+// Load spaces list for management
+async function loadSpacesList() {
+  const response = await axios.get('/api/address-spaces');
+  const spacesList = document.getElementById('spaces-list');
+  spacesList.innerHTML = '';
+  
+  if (response.data.length === 0) {
+    spacesList.innerHTML = '<p>Keine Adressräume vorhanden.</p>';
+    return;
+  }
+  
+  response.data.forEach(space => {
+    const spaceItem = document.createElement('div');
+    spaceItem.className = 'space-item';
+    spaceItem.innerHTML = `
+      <span class="space-info">
+        <strong>${space.name}</strong> - ${space.cidr}
+      </span>
+      <button class="delete-space-btn" onclick="deleteSpace('${space.name}', ${space.id})">Löschen</button>
+    `;
+    spacesList.appendChild(spaceItem);
+  });
+}
+
+// Delete space function
+async function deleteSpace(spaceName, spaceId) {
+  if (!confirm(`Möchten Sie den Adressraum "${spaceName}" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.`)) {
+    return;
+  }
+  
+  try {
+    await axios.delete(`/api/address-space/${spaceId}`);
+    alert('Adressraum erfolgreich gelöscht!');
+    await loadSpacesList(); // Reload list
+    await populateAddressSpaceDropdown(); // Update dropdown
+  } catch (error) {
+    alert('Fehler beim Löschen: ' + error.message);
+  }
+}
