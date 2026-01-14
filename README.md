@@ -60,6 +60,7 @@ docker compose up -d
 ### 1. Projekt klonen
 
 ```bash
+cd /opt/
 git clone https://github.com/bmetallica/ipv4manage.git /opt/ipv4manage
 cd /opt/ipv4manage/ipmanage
 ```
