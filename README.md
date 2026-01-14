@@ -39,7 +39,7 @@ Die Anwendung läuft standardmäßig auf **Port 88** (dies kann in `server.js` a
 ```bash
 mkdir ipmanage
 cd ipmanage
-wget https://github.com/bmetallica/ipv4manage/blob/main/docker-compose.yml
+wget https://raw.githubusercontent.com/bmetallica/ipv4manage/refs/heads/main/docker-compose.yml
 docker compose up -d
 ```
 <br><br>
