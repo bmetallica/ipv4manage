@@ -84,6 +84,8 @@ sudo -u postgres psql -d ipvx -f /opt/ipv4manage/utils/create.sql
 sudo -u postgres psql -c "CREATE USER mein_user WITH PASSWORD 'mein_passwort';" 
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ipvx TO mein_user;" 
 sudo -u postgres psql -c "ALTER DATABASE ipvx OWNER TO mein_user;"
+sudo -u postgres psql -d ipvx -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO mein_user;"
+sudo -u postgres psql -d ipvx -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO mein_user;"
 ```
 
 ### 4. Umgebungsvariablen konfigurieren
