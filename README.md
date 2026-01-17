@@ -77,6 +77,7 @@ npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-write
 
 ```bash
 # Datenbank "ipvx" anlegen (z. B. mit pgAdmin oder psql)
+sudo -u postgres psql -c "create database ipvx"
 sudo -u postgres psql -d ipvx -f /opt/ipv4manage/utils/create.sql
 ```
 
