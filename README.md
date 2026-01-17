@@ -79,6 +79,11 @@ npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-write
 # Datenbank "ipvx" anlegen (z. B. mit pgAdmin oder psql)
 sudo -u postgres psql -c "create database ipvx"
 sudo -u postgres psql -d ipvx -f /opt/ipv4manage/utils/create.sql
+
+#Usernamen und Passwort setzen!!!
+sudo -u postgres psql -c "CREATE USER mein_user WITH PASSWORD 'mein_passwort';" 
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ipvx TO mein_user;" 
+sudo -u postgres psql -c "ALTER DATABASE ipvx OWNER TO mein_user;"
 ```
 
 ### 4. Umgebungsvariablen konfigurieren
