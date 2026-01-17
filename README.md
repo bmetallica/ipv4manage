@@ -45,6 +45,7 @@ docker compose up -d
 <br><br>
 
 ### ⚙️ **Manuelle Installation**
+(als root User durchführen)
 
 <table border=2><tr><th>🔧 Voraussetzungen</th><td>
 
@@ -67,7 +68,7 @@ cd /opt/ipv4manage/ipmanage
 ### 2. Abhängigkeiten installieren
 
 ```bash
-apt install nmap -y
+apt install nmap sudo -y
 npm init -y
 npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-writer ip axios
 ```
@@ -76,7 +77,7 @@ npm install express pg socket.io jwt-simple node-cron cors dotenv nmap csv-write
 
 ```bash
 # Datenbank "ipvx" anlegen (z. B. mit pgAdmin oder psql)
-psql -d ipvx -f /opt/ipv4manage/utils/create.sql
+sudo -u postgres psql -d ipvx -f /opt/ipv4manage/utils/create.sql
 ```
 
 ### 4. Umgebungsvariablen konfigurieren
